@@ -1,0 +1,26 @@
+name: Auto-Update TOC
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'designs/**'
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Run Script
+        run: python Update.py
+      - name: Commit Change
+        run: |
+          git config --global user.name 'Walipa-Bot'
+          git config --global user.email 'bot@walipa.com'
+          git add README.md
+          git commit -m "docs: auto-update TOC for the 33 designs" || echo "No changes"
+          git push
