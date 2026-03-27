@@ -1,6 +1,6 @@
 # Walipa Design #01: G-Bike (Utility/Ground)
 **Status:** Phase 1 (Core Prototype)
-**License:** Open Source Holistic (Stewardship Covenant)
+**License:** Open Source Holistic (Stewardship Covenant) 
 **Version:** 1.0.4
 
 ## 1. Overview
