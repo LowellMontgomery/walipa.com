@@ -1,0 +1,36 @@
+name: Sync README TOC
+on:
+  push:
+    paths:
+      - 'Designs/*.md'
+jobs:
+  update-toc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Rebuild TOC
+        run: |
+          DESIGN_DIR="Designs"
+          README="README.md"
+          
+          # Generate the Markdown list
+          NEW_TOC=$(find "$DESIGN_DIR" -name "*.md" | sort | while read -r file; do
+              base=$(basename "$file")
+              num=$(echo "$base" | cut -d'_' -f1 | sed 's/^0*//')
+              name=$(echo "$base" | cut -d'_' -f2- | sed 's/.md//' | tr '_' ' ')
+              echo "    * [$num $name]($file)"
+          done)
+          
+          # Use sed to replace content between the markers
+          # We use a temporary file to avoid stream grit
+          sed -e "//,// { //! { //! d; }; }" "$README" > "$README.tmp"
+          sed -i "//a \\$NEW_TOC" "$README.tmp"
+          mv "$README.tmp" "$README"
+          
+      - name: Commit and Push Changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add README.md
+          git commit -m "Vitrified: Auto-update README Table of Contents" || echo "No changes to commit"
+          git push
