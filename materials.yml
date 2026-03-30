@@ -1,0 +1,22 @@
+# Walipa Elemental Manifest
+version: 1.0.0
+super_categories:
+  - id: carbon_elements
+    name: "Carbon & Graphite"
+    description: "The conductive and structural backbone of the OSH Forge."
+    materials: [graphite, bio-char, carbon_fiber]
+  
+  - id: silicates
+    name: "Silicates & Glass"
+    description: "The vitrifying agents and transparent membranes."
+    materials: [sodium_silicate, borosilicate, liquid_glass]
+
+  - id: basalt_volcanics
+    name: "Basaltic Foundations"
+    description: "High-tensile mineral fibers for structural grace."
+    materials: [basalt_fiber, volcanic_ash, cast_basalt]
+
+  - id: bio_polymers
+    name: "Living Membranes"
+    description: "The ETFE and Hemp-Resin interfaces."
+    materials: [etfe, hemp_resin, mycelium_composite]
